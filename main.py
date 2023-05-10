@@ -116,4 +116,3 @@ if __name__ == "__main__":
     ## tkinter window closes
     ## As GUI thread is the main dominant thread running
     ## dictated by mainloop() call
-
