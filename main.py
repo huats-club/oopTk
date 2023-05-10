@@ -75,7 +75,7 @@ class Window(tk.Frame):
         # We don't need to call this method again using the tkinter events
         # Because it has ended and no need to show anymore changes
 
-    def onClose(self):
+    def on_close(self):
         if self.countdown_thread != None and self.countdown_thread.is_alive():
             # You may encounter EOFError if you don't handle the exception
             # where you read a pipe that is closed forcefully in your above update() calls
@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
     # This is one example of using the object returned
     # to invoke a method from  outside
-    root.protocol("WM_DELETE_WINDOW", mainApp.onClose)
+    root.protocol("WM_DELETE_WINDOW", mainApp.on_close)
 
     # Let "root" Tk object's thread continue until program ends
     root.mainloop()
