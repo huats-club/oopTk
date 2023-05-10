@@ -5,6 +5,10 @@ import tkinter as tk
 import multiprocessing
 import time
 
+# Global variable of the number
+# to begin countdown from
+COUNTDOWN_MAX_NUM = 10
+
 # An example of a long, blocking operation to be threaded inside GUI
 def decrement(start_num, pipe_out):
     while start_num > 0:
@@ -45,7 +49,7 @@ class Window(tk.Frame):
         # second pipe "process_pipe" to be passed as object to long running function in process
         # to pass data to the "gui_pipe"
         self.gui_pipe, process_pipe = multiprocessing.Pipe()
-        self.countdown_thread = multiprocessing.Process(target=decrement, args=(10, process_pipe,))
+        self.countdown_thread = multiprocessing.Process(target=decrement, args=(COUNTDOWN_MAX_NUM, process_pipe,))
         self.countdown_thread.start()
 
         # Using Tkinter's own timer event to update the screen
