@@ -41,7 +41,6 @@ class Window(tk.Frame):
 
     # Prepare the countdown mechanism
     def do_countdown(self):
-
         # Create a pipe, first "gui_pipe" to be kept as attribute to receive data
         # second pipe "process_pipe" to be passed as object to long running function in process
         # to pass data to the "gui_pipe"
@@ -53,6 +52,8 @@ class Window(tk.Frame):
         # every 100 ms
         self.parent.after(100, self.update)
 
+    # Poll for incoming numbers from the decrement thread
+    # and update the GUI
     def update(self):
         if self.gui_pipe.poll(1):
             num = self.gui_pipe.recv()
@@ -64,6 +65,8 @@ class Window(tk.Frame):
                 self.countdown_var.set("End!")
                 self.parent.after(1000, self.clear_countdown_label)
             else: 
+                # Received a valid number that is positive
+                # and set to the GUI lavel to view
                 self.countdown_var.set(f"{num}")
 
                 # Calling this method again, after 100ms
