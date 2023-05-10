@@ -70,6 +70,9 @@ class Window(tk.Frame):
                 # to update the next number received from the pipe
                 self.parent.after(100, self.update)
 
+    # Remove the last number in the countdown label
+    # after countdown has completed
+    # by replacing with a space
     def clear_countdown_label(self):
         self.countdown_var.set("")
         # We don't need to call this method again using the tkinter events
