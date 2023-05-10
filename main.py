@@ -75,6 +75,7 @@ class Window(tk.Frame):
         # We don't need to call this method again using the tkinter events
         # Because it has ended and no need to show anymore changes
 
+    # Clean up actions to be done when "X" is clicked on the application
     def on_close(self):
         if self.countdown_thread != None and self.countdown_thread.is_alive():
             # You may encounter EOFError if you don't handle the exception
