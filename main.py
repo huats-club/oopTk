@@ -19,8 +19,8 @@ def decrement(start_num, pipe_out):
 # i.e. owns the public/protected methods of tk.Frame, behaves like it
 # and can own extra behaviors on top of it/augment the existing methods (by override the methods)
 class Window(tk.Frame):
-    def __init__(self, parent):
-        self.parent = parent
+    def __init__(self, root):
+        self.root = root
 
         # Add label greeting
         self.label = tk.Label(text="Hello")
@@ -63,7 +63,7 @@ class Window(tk.Frame):
 
                 # UIUX, show user that process has ended
                 self.countdown_var.set("End!")
-                self.parent.after(1000, self.clear_countdown_label)
+                self.root.after(1000, self.clear_countdown_label)
             else: 
                 # Received a valid number that is positive
                 # and set to the GUI lavel to view
@@ -71,7 +71,7 @@ class Window(tk.Frame):
 
                 # Calling this method again, after 100ms
                 # to update the next number received from the pipe
-                self.parent.after(100, self.update)
+                self.root.after(100, self.update)
 
     # Remove the last number in the countdown label
     # after countdown has completed
@@ -90,7 +90,7 @@ class Window(tk.Frame):
             self.countdown_thread.kill() 
 
         # Destroy the tkinter object
-        self.parent.destroy()
+        self.root.destroy()
 
 if __name__ == "__main__":
     # Creating the Tk object to "contain" all of our widgets
